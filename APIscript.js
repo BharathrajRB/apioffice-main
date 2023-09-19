@@ -114,6 +114,7 @@ function handleDeleteAll() {
     localStorage.removeItem('students'); // Clear the local storage
     const tableBody = document.querySelector('#student-table tbody');
     tableBody.innerHTML = ''; // Clear the table
+    // tableBody.innerHtml = 'no data found'
 }
 
 function log() {
