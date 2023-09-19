@@ -10,7 +10,7 @@ if (storedData) {
         })
         .catch(error => console.error('Error : ', error));
 }
-// Display students in the table
+
 function displayStudents(students) {
     const tableBody = document.querySelector('#student-table tbody');
     tableBody.innerHTML = '';
@@ -29,7 +29,7 @@ function displayStudents(students) {
     });
 }
 
-// Attach event listener to "Edit" button
+
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('edit-btn')) {
         handleEdit(event);
@@ -42,20 +42,17 @@ document.addEventListener('click', function (event) {
     }
 });
 
-// Attach event listener to "Delete" all button
+
 document.querySelector('.delall').addEventListener('click', handleDeleteAll);
 
-// Handle edit button click
 function handleEdit(event) {
     const studentId = event.target.getAttribute('data-id');
     const students = JSON.parse(localStorage.getItem('students'));
 
-    // Find the student by ID
     const studentIndex = students.findIndex(s => s.name === studentId);
     if (studentIndex !== -1) {
         const student = students[studentIndex];
 
-        // Display an edit form
         const editForm = `
                     <td><input type="text" id="edit-name" value="${student.name}" /></td>
                     <td><input type="number" id="edit-age" value="${student.age}" /></td>
@@ -92,24 +89,20 @@ function handleEdit(event) {
     }
 }
 
-// Handle delete button click
 function handleDelete(event) {
     const studentId = event.target.getAttribute('data-id');
     const students = JSON.parse(localStorage.getItem('students'));
 
-    // Find the student by ID
     const studentIndex = students.findIndex(s => s.name === studentId);
     if (studentIndex !== -1) {
         students.splice(studentIndex, 1); // Remove the student from the array
         localStorage.setItem('students', JSON.stringify(students));
 
-        // Remove the row from the table
         const row = event.target.parentNode.parentNode;
         row.remove();
     }
 }
 
-// Handle delete all button click
 function handleDeleteAll() {
     localStorage.removeItem('students'); // Clear the local storage
     const tableBody = document.querySelector('#student-table tbody');
@@ -138,5 +131,4 @@ function logbac() {
     }
 }
 
-// Execute logbac on page load
 logbac();
